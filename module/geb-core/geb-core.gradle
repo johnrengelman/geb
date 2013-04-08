@@ -7,6 +7,7 @@ dependencies {
 	// system makes transitive compile dependencies first class compile dependencies.
 	compile project(":module:geb-implicit-assertions")
 	compile project(":module:geb-ast")
+    compile 'org.apache.commons:commons-lang3:3.1'
 }
 
 test {
