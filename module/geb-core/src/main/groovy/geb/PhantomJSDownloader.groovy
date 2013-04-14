@@ -33,8 +33,8 @@ class PhantomJSDownloader extends Downloader {
     }
 
     String getLinuxPlatform() {
-        String arch = System.getProperty('sun.arch.data.model')
-        if (arch == '64') return 'linux-x86'
-        else return 'linux-i686'
+      String platform = (is64BitLinux()) ? 'linux-x86' : 'linux-i686'
+
+      return platform
     }
 }

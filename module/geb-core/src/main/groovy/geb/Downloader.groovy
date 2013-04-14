@@ -1,6 +1,6 @@
 package geb
 
-import org.apache.commons.lang3.SystemUtils
+import org.openqa.selenium.Platform
 
 abstract class Downloader {
 
@@ -66,9 +66,9 @@ abstract class Downloader {
     }
 
     String getPlatform() {
-        if (SystemUtils.IS_OS_MAC) return macPlatform
-        if (SystemUtils.IS_OS_WINDOWS) return windowsPlatform
-        if (SystemUtils.IS_OS_LINUX) return linuxPlatform
+        if (Platform.current.is(Platform.MAC)) return macPlatform
+        if (Platform.current.is(Platform.WINDOWS)) return windowsPlatform
+        if (Platform.current.is(Platform.LINUX)) return linuxPlatform
     }
 
     String getMacPlatform() {
@@ -80,9 +80,16 @@ abstract class Downloader {
     }
 
     String getLinuxPlatform() {
-        String arch = System.getProperty('sun.arch.data.model')
-        if (arch == '64') return 'linux64'
-        else return 'linux32'
+      String platform = (is64BitLinux()) ? 'linux64' : 'linux32'
+
+      return platform
     }
 
+    String getLinuxArch() {
+      System.getProperty('sun.arch.data.model')
+    }
+
+    boolean is64BitLinux() {
+      (System.getProperty('sun.arch.data.model') == '64')
+    }
 }
